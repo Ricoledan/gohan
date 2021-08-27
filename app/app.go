@@ -2,12 +2,19 @@ package app
 
 import "github.com/gorilla/mux"
 
-type App struck {
+type App struct {
 	Router *mux.Router
 }
 
 func New() *App {
-	return &App{
-			Router: mux.NewRouter()
+	a := &App{
+			Router: mux.NewRouter(),
 	}
+
+	a.initRoutes()
+	return a
+}
+
+func (a *App) initRoutes() {
+	a.Router.HandleFunc("/", a.IndexHandler()).Methods("GET")
 }
